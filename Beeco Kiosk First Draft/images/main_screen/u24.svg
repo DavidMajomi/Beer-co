@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" width="33px" height="39px" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <mask fill="white" id="Clip20">
+      <path d="M 16.5 51.5  C 14.28 51.5  12.5 49.72  12.5 47.5  L 12.5 17.5  C 12.5 15.28  14.28 13.5  16.5 13.5  L 40.5 13.5  C 42.72 13.5  44.5 15.28  44.5 17.5  L 44.5 47.5  C 44.5 49.72  42.72 51.5  40.5 51.5  L 16.5 51.5  " fill-rule="evenodd" />
+    </mask>
+  </defs>
+  <g transform="matrix(1 0 0 1 -12 -13 )">
+    <path d="M 12 13  L 45 13  L 45 52  L 12 52  L 12 13  " fill-rule="nonzero" fill="rgba(204, 204, 204, 1)" stroke="none" class="fill" mask="url(#Clip20)" />
+    <path d="M 14 15  L 43 15  L 43 50  L 14 50  L 14 15  " fill-rule="nonzero" fill="rgba(255, 255, 255, 1)" stroke="none" class="fill" mask="url(#Clip20)" />
+    <path d="M 31.634999999999998 23.8  C 30.249 23.8  29.16 22.711000000000002  29.16 21.325000000000003  C 29.16 19.939  30.249 18.85  31.634999999999998 18.85  C 33.021 18.85  34.11 19.939  34.11 21.325000000000003  C 34.11 22.711000000000002  33.021 23.8  31.634999999999998 23.8  " fill-rule="nonzero" fill="rgba(204, 204, 204, 1)" stroke="none" class="fill" mask="url(#Clip20)" />
+    <path d="M 15 49  L 15 30.849999999999998  L 21.75 22.599999999999998  L 31.2 29.2  L 36.6 27.55  L 42 29.2  L 42 49  L 15 49  " fill-rule="nonzero" fill="rgba(22, 155, 213, 1)" stroke="none" class="fill" mask="url(#Clip20)" />
+    <path d="M 16 51.5  C 14.057500000000001 51.5  12.5 49.9425  12.5 48  L 12.5 17  C 12.5 15.0575  14.057500000000001 13.5  16 13.5  L 41 13.5  C 42.9425 13.5  44.5 15.0575  44.5 17  L 44.5 48  C 44.5 49.9425  42.9425 51.5  41 51.5  L 16 51.5  Z " stroke-width="1" stroke-dasharray="0" stroke="rgba(222, 222, 222, 1)" fill="none" class="stroke" mask="url(#Clip20)" />
+  </g>
+</svg>
