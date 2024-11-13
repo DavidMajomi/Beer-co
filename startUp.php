@@ -1,89 +1,90 @@
 <?php
-// This file is for first-run only. It will reset all the data in the project, refreshing to a default state.
-// This file will create/overwrite all the tables in the system.
 
-/* Database credentials. Assuming you are running MySQL
+// This file is responsible for RESETTING THE DATABASE TO A DEFAULT STATE. It will overwrite/create the database from the start.
+
+/* Attempt MySQL server connection. Assuming you are running MySQL
 server with default setting (user 'root' with no password) */
-define('DB_SERVER', 'localhost');
-define('DB_USERNAME', 'root');
-define('DB_PASSWORD', '');
-define('DB_NAME', 'demo');
- 
-/* Attempt to connect to MySQL database */
-$link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME);
- 
+$link = mysqli_connect("localhost", "root", "");
+
+/*
+                 RESETTING DATABASE
+*/
 // Check connection
 if($link === false){
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 
-// CUSTOMER ANALYTICS TABLE
+// SQL to drop the database if it exists
+$drop_sql = "DROP DATABASE IF EXISTS beerco";
 
-// SQL to drop the table if it exists
-$drop_sql = "DROP TABLE IF EXISTS customerAnalytics";
-if(mysqli_query($link, $drop_sql)){
-    echo "Table customerAnalytics dropped successfully.<br>";
+// Execute the drop query
+if (mysqli_query($link, $drop_sql)) {
+    echo "Database 'beerco' dropped successfully (if it existed).<br>";
 } else {
-    echo "ERROR: Could not execute $drop_sql. " . mysqli_error($link) . "<br>";
+    echo "ERROR: Could not drop database 'beerco'. " . mysqli_error($link) . "<br>";
 }
 
-// Attempt create table query execution
-$sql = "
-        CREATE TABLE customerAnalytics (
-            id INT AUTO_INCREMENT PRIMARY KEY,
-            month VARCHAR(7),             -- Format: 'YYYY-MM'
-            beerclicks JSON,                      -- Array of key-value pairs, stored as JSON
-            search_queries JSON,                  -- Array of strings, stored as JSON
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )";
+// SQL to create the database
+$sql = "CREATE DATABASE beerco";
 
-if(mysqli_query($link, $sql)){
-    echo "Table created successfully.";
-} else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+// Attempt create database query execution
+if (mysqli_query($link, $sql)) {
+    echo "Database 'beerco' created successfully.<br>";
+} else {
+    echo "ERROR: Could not execute $sql. " . mysqli_error($link) . "<br>";
 }
 
+mysqli_close($link);
+/*
+                 DATABASE RESET
+*/
 
+/*
+                 CREATING BEER TABLE
+*/
 
-// CUSTOMER ANALYTICS TABLE
+// BEER TABLE
+$link = mysqli_connect("localhost", "root", "", "beerco");
 
 // SQL to drop the table if it exists
 $drop_sql = "DROP TABLE IF EXISTS beers";
 if(mysqli_query($link, $drop_sql)){
-    echo "Table beers dropped successfully.<br>";
+    echo "Table 'beers' dropped successfully.<br>";
 } else {
-    echo "ERROR: Could not execute $drop_sql. " . mysqli_error($link) . "<br>";
+    echo "ERROR: Not able to execute $drop_sql. " . mysqli_error($link) . "<br>";
 }
 
 // Attempt create table query execution
 $sql = "
-        CREATE TABLE beers (
+        CREATE TABLE IF NOT EXISTS beers (
             id INT AUTO_INCREMENT PRIMARY KEY,
-            beerName VARCHAR(7),             -- Format: 'YYYY-MM'
-            beerOrigin VARCHAR(15),                      -- 15-length string, prioritizing origin as Brewer, then Country if brewer doesnt exist.
-            clicks INT,                  -- Number of clicks
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )";
+            brand_name VARCHAR(255),
+            brewer VARCHAR(255),
+            origin VARCHAR(255),
+            beer_style VARCHAR(255),
+            spec_beer_style VARCHAR(255),
+            description TEXT,
+            food_pairings TEXT,
+            ounces FLOAT,
+            milliliters INT,
+            abv FLOAT,
+            ibu INT,
+            srm INT,
+            calories INT
+        );";
 
 if(mysqli_query($link, $sql)){
-    echo "Table created successfully.";
+    echo "Table 'beers' created successfully.";
 } else{
-    echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+    echo "ERROR: Not able to execute $sql. " . mysqli_error($link);
 }
 
 
+/*
+                 BEER TABLE CREATED
+*/
 
 
-
-
-
-
-
-
-
-
-
- 
 // Close connection
 mysqli_close($link);
-
+?>
