@@ -12,9 +12,8 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
-        /* General Body Styling */
+    
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
         }
 
@@ -116,32 +115,37 @@
 
         /* Styling for the search box */
         .search-box {
-            display: flex;
+            display: block;
             justify-content: center; /* Center search bar */
             margin-top: 20px;         /* Space below the banner */
             font-size: 14px;
-            margin-left: 175px;
-            
+            padding-left: 175px;
+            padding-right: 175px;
         }
 
         /* Search input styling */
         .search-box input[type="text"] {
             height: 70px;
-            padding: 5px 10px;
+            /* padding: 5px 10px;
             border: 1px solid #CCCCCC;
-            font-size: 14px;
+            font-size: 14px; */
             width: 100%; 
             box-sizing: border-box;
         }
 
-        /* Search results styling */
+  
         .result {
-            position: absolute;
-            z-index: 999;
-            top: 100%;
-            left: 0;
-            width: 100%;
-            box-sizing: border-box;
+            display: block;
+            position: relative;        /* Position results relative to the .search-box */
+            top: 15%;                  /* Place the results directly below the search box */
+            left: 0;                    /* Align to the left of the search box */
+            width: 100%;                /* Ensure results take full width */
+            max-height: 300px;          /* Optional: limit the height of the result dropdown */
+            overflow-y: auto;           /* Scroll if the results exceed the height */
+            background-color: #fff;     /* Background for the result box */
+            border: 1px solid #ccc;     /* Border around the results */
+            z-index: 9999;              /* Make sure the results appear above other content */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);  /* Optional: add a slight shadow */
         }
 
         /* Styling for each result item */
@@ -189,7 +193,7 @@
         </div>
 
         <div class="settings-container">
-            <a href="settings.html" class="settings-link">
+            <a href='Beeco Kiosk First Draft/specials.html' class="settings-link">
                 <i class="fas fa-cogs"></i> 
             </a>
         </div>
@@ -214,57 +218,10 @@
     </div>
 
     <div class="search-box">
-        <input type="text" autocomplete="on" placeholder="Search beers..." />
+        <input type="text" autocomplete="off" placeholder="Search beers..." />
         <div class="result"></div>
     </div>
+    <!-- <p> Fisjesfodndfion</p> -->
 </body>
 
-<?php
-/* Attempt MySQL server connection. Assuming you are running MySQL
-server with default setting (user 'root' with no password) */
-$link = mysqli_connect("localhost", "root", "", "beerco");
- 
-// Check connection
-if($link === false){
-    die("ERROR: Could not connect. " . mysqli_connect_error());
-}
- 
-if(isset($_REQUEST["term"])){
-    // Prepare a select statement
-    $sql = "SELECT * FROM beers WHERE name LIKE ?";
-    
-    if($stmt = mysqli_prepare($link, $sql)){
-        // Bind variables to the prepared statement as parameters
-        mysqli_stmt_bind_param($stmt, "s", $param_term);
-        
-        // Set parameters
-        $param_term = $_REQUEST["term"] . '%';
-        
-        // Attempt to execute the prepared statement
-        if(mysqli_stmt_execute($stmt)){
-            $result = mysqli_stmt_get_result($stmt);
-            
-            // Check number of rows in the result set
-            if(mysqli_num_rows($result) > 0){
-                // Fetch result rows as an associative array
-                while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
-                    echo "<p>" . $row["name"] . "</p>";
-                }
-            } else{
-                echo "<p>No matches found</p>";
-            }
-        } else{
-            echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
-        }
-    }
-     
-    // Close statement
-    mysqli_stmt_close($stmt);
-}
- 
-// close connection
-mysqli_close($link);
-?>
-
-</body>
 </html>
