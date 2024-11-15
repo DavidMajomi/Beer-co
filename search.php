@@ -135,11 +135,14 @@
             // Handle keyup event to trigger search
             $('.search-box input[type="text"]').on("keyup input", function(){
                 var inputVal = $(this).val();
-                var selectedFilter = $('#filter-select').val();  // Get selected filter
+                var brewerFilter = $('#brewer-select').val();  // Get selected filter
+                var countryFilter = $('#country-select').val();  
+                var styleFilter = $('#style-select').val();
+                var srmFilter = $('#srm-select').val();
                 var resultDropdown = $(this).siblings(".result");
                 
                 if(inputVal.length){
-                    $.get("backend-search.php", {term: inputVal, filter: selectedFilter}).done(function(data){
+                    $.get("backend-search.php", {term: inputVal, brewer: brewerFilter, country: countryFilter, style: styleFilter, srn: srmFilter}).done(function(data){
                         // Display the returned data in the result dropdown
                         resultDropdown.html(data);
                     });
