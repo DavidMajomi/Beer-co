@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -60,9 +61,8 @@
             text-overflow: ellipsis;
         }
 
-        /* Settings container */
         .settings-container {
-            margin-right: 20px;  /* Space from the right edge of the page */
+            margin-right: 20px;  
         }
 
         /* Settings link styling */
@@ -71,6 +71,37 @@
             text-decoration: none;
             font-size: 30px;
             padding: 20px;
+        }
+
+        .help-container {
+            margin-right: 20px;  /* Space from the right edge */
+        }   
+
+        /* Help link styling */
+        .help-link {
+            color: black;
+            text-decoration: none;
+            font-size: 30px;
+            padding: 20px;
+        }
+
+        /* Styling for the Close icon container (X) */
+        .close-container {
+            margin-right: 20px;  /* Space from the right edge */
+        }
+
+        /* Close link styling */
+        .close-link {
+            color: black;
+            text-decoration: none;
+            font-size: 30px;
+            padding: 20px;
+        }
+
+        /* Optional: Styling the icons when hovering */
+        .help-link:hover, .close-link:hover {
+            color: #4CAF50; /* Change color on hover */
+            text-decoration: underline;
         }
 
         /* Hover effect for the banner */
@@ -99,7 +130,7 @@
             padding: 5px 10px;
             border: 1px solid #CCCCCC;
             font-size: 14px;
-            width: 100%; /* Makes the input full-width within the search box */
+            width: 100%; 
             box-sizing: border-box;
         }
 
@@ -169,16 +200,16 @@
             </div>
         </div>
 
-        <div class="settings-container">
-            <a href="settings.html" class="settings-link">
-                <i class="fas fa-cogs"></i> 
+        <div class="help-container">
+            <a href="help.html" class="help-link">
+                <i class="fa-solid fa-question"></i>
             </a>
         </div>
 
-        <div class="settings-container">
-            <a href="settings.html" class="settings-link">
-                <i class="fa-solid fa-x"></i>
-            </a>
+        <div class="close-container">
+                <a href="close.html" class="close-link">
+                    <i class="fa-solid fa-x"></i>
+                </a>
         </div>
     </div>
 
