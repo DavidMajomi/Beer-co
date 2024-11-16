@@ -106,7 +106,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $ibu = null;
     } elseif (!is_numeric($input_ibu)) {
         // Validate if the input is a valid number
-        $ibu_err = "Please enter a valid number for milliliters.";
+        $ibu_err = "Please enter a valid number for IBU.";
     } else {
         // Assign the value to the variable if it's a valid number
         $ibu = $input_ibu;
@@ -120,10 +120,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $srm = null;
     } elseif (!is_numeric($input_srm)) {
         // Validate if the input is a valid number
-        $srm_err = "Please enter a valid number for milliliters.";
+        $srm_err = "Please enter a valid number for SRM.";
     } else {
         // Assign the value to the variable if it's a valid number
-        $srm = $srm_ibu;
+        $srm = $input_srm;
     }
 
     // Validate calories
