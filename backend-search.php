@@ -39,6 +39,16 @@ if(isset($_REQUEST["srm"]) && $_REQUEST["srm"] != 'all') {
     $filters[] = "srm = ?";
 }
 
+// Check if ABV is selected
+if (isset($_REQUEST["abv"]) && $_REQUEST["abv"] != 'all') {
+    $filters[] = "abv = ?";
+}
+
+// Check if IBU is selected
+if (isset($_REQUEST["ibu"]) && $_REQUEST["ibu"] != 'all') {
+    $filters[] = "ibu = ?";
+}
+
 // If there are filters, append them to the SQL query
 if(count($filters) > 0) {
     $sql .= " AND " . implode(" AND ", $filters);
@@ -79,6 +89,18 @@ if($stmt = mysqli_prepare($link, $sql)) {
     if(isset($_REQUEST["srm"]) && $_REQUEST["srm"] != 'all') {
         $params[] = $_REQUEST["srm"];
         $param_types .= 's'; // string
+    }
+
+    // Add parameters for ABV (if selected)
+    if (isset($_REQUEST["abv"]) && $_REQUEST["abv"] != 'all') {
+        $params[] = (float)$_REQUEST["abv"]; // Ensure it's treated as a float
+        $param_types .= 'd'; // double (float)
+    }
+
+    // Add parameters for IBU (if selected)
+    if (isset($_REQUEST["ibu"]) && $_REQUEST["ibu"] != 'all') {
+        $params[] = (float)$_REQUEST["ibu"]; // Ensure it's treated as a float
+        $param_types .= 'd'; // double (float)
     }
 
     // Bind the parameters dynamically

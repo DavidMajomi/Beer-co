@@ -139,10 +139,12 @@
                 var countryFilter = $('#country-select').val();  
                 var styleFilter = $('#style-select').val();
                 var srmFilter = $('#srm-select').val();
+                var abvFilter =$('abv-select').val();
+                var ibuFilter =$('ibu-select').val();
                 var resultDropdown = $(this).siblings(".result");
                 
                 if(inputVal.length){
-                    $.get("backend-search.php", {term: inputVal, brewer: brewerFilter, country: countryFilter, style: styleFilter, srn: srmFilter}).done(function(data){
+                    $.get("backend-search.php", {term: inputVal, brewer: brewerFilter, country: countryFilter, style: styleFilter, srn: srmFilter, abv: abvFilter, ibu: ibuFilter}).done(function(data){
                         // Display the returned data in the result dropdown
                         resultDropdown.html(data);
                     });
@@ -218,12 +220,9 @@
                 <option value="lager">Lager</option>
             </select>
 
-            <label for="filter-number"></label>
-            <input type="number" id="filter-number" class="form-control" placeholder="Enter Number" min="1" max="100">
+            <input type="number" id="abv-select" class="form-control" placeholder="ABV" min="1" max="100">
 
-
-            <label for="filter-number"></label>
-            <input type="number" id="filter-number" class="form-control" placeholder="Enter Number" min="1" max="100">
+            <input type="number" id="ibu-select" class="form-control" placeholder="IBU" min="1" max="100">
             
 
             <select id="srm-select" class="form-control">
