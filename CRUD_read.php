@@ -141,7 +141,7 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                         <label>Stock Status</label>
                         <p><b><?php echo "<td><img src='" . ($row['stock'] == 1 ? 'images/yes.png' : 'images/no.png') . "' alt='" . ($row['stock'] == 1 ? 'Yes' : 'No') . "' style='width: 20px; height: 20px;'></td>"; ?></b></p>
                     </div>
-                    <p><a href="index.php" class="btn btn-primary">Back</a></p>
+                    <p><a href="admin_index.php" class="btn btn-primary">Back</a></p>
                 </div>
             </div>        
         </div>

@@ -167,8 +167,8 @@
             <img src="path_to_logo.png" alt="Logo" class="logo">
         </div>
 
-        <div class="settings-container">
-            <a href='login.php' class="settings-link">
+        <div class="admin_settings-container">
+            <a href='admin_login.php' class="settings-link">
                 <i class="fas fa-cogs"></i> 
             </a>
         </div>

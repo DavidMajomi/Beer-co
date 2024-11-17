@@ -20,6 +20,7 @@
             align-items: center;
             height: 100vh;
             margin: 0;
+            position: relative; /* Ensure the container is positioned relative */
         }
         .container {
             width: 80%;
@@ -68,6 +69,19 @@
         .btn-secondary:hover {
             background-color: #777;
         }
+        /* Reset button styles */
+        .btn-danger {
+            background-color: #f44336;
+            color: white;
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            width: auto;
+            padding: 10px 20px;
+        }
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
     </style>
 </head>
 <body>
@@ -78,7 +92,7 @@
 
     <div class="mt-4">
         <!-- Edit Database Button -->
-        <a href="index.php" class="btn btn-primary btn-lg">
+        <a href="admin_index.php" class="btn btn-primary btn-lg">
             <i class="fas fa-database"></i> Edit Database
         </a>
 
@@ -93,3 +107,13 @@
         </a>
     </div>
 </div>
+
+<!-- Reset Database Form -->
+<form action="confirmReset.php" method="POST" >
+    <button type="submit" class="btn btn-danger btn-lg">
+        <i class="fas fa-trash-alt"></i> Reset Database
+    </button>
+</form>
+
+</body>
+</html>
