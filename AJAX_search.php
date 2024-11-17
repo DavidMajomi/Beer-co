@@ -144,7 +144,7 @@
                 var resultDropdown = $(this).siblings(".result");
                 
                 if(inputVal.length){
-                    $.get("backend-search.php", {term: inputVal, brewer: brewerFilter, country: countryFilter, style: styleFilter, srn: srmFilter, abv: abvFilter, ibu: ibuFilter}).done(function(data){
+                    $.get("AJAX_backend_search.php", {term: inputVal, brewer: brewerFilter, country: countryFilter, style: styleFilter, srn: srmFilter, abv: abvFilter, ibu: ibuFilter}).done(function(data){
                         // Display the returned data in the result dropdown
                         resultDropdown.html(data);
                     });
