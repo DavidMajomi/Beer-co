@@ -150,4 +150,43 @@ if (mysqli_query($link, $sql_insert)) {
 // Close connection
 mysqli_close($link);
 
+
+// Reset admin and prompt creation
+
+// Connect to the MySQL server
+$link = mysqli_connect("localhost", "root", "");
+
+// Check if the connection was successful
+if (!$link) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+// SQL to drop the database if it exists
+$drop_sql = "DROP DATABASE IF EXISTS admin_db";
+
+// Execute the drop query
+if (mysqli_query($link, $drop_sql)) {
+    echo "Database 'admin_db' dropped successfully (if it existed).<br>";
+} else {
+    echo "ERROR: Could not drop database 'admin_db'. " . mysqli_error($link) . "<br>";
+}
+
+// SQL to create the database
+$sql = "CREATE DATABASE admin_db";
+
+// Attempt create database query execution
+if (mysqli_query($link, $sql)) {
+    echo "Database 'admin_db' created successfully.<br>";
+} else {
+    echo "ERROR: Could not execute $sql. " . mysqli_error($link) . "<br>";
+}
+
+// Close the database connection
+mysqli_close($link);
+
+
+// Redirect to create_admin.php
+header("Location: create_admin.php");
+exit(); // It's a good practice to call exit() after the header redirect to stop further script execution
+
 ?>

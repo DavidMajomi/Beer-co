@@ -168,7 +168,7 @@
         </div>
 
         <div class="settings-container">
-            <a href='Beeco Kiosk First Draft/specials.html' class="settings-link">
+            <a href='login.php' class="settings-link">
                 <i class="fas fa-cogs"></i> 
             </a>
         </div>
@@ -186,7 +186,7 @@
         </div>
 
         <div class="close-container">
-            <a href="close.html" class="close-link">
+            <a href="idle.php" class="close-link">
                 <i class="fa-solid fa-x"></i>
             </a>
         </div>

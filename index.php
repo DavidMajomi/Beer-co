@@ -1,3 +1,17 @@
+<?php
+// Start the session
+session_start();
+
+// Check if the user is logged in and if the logout button is clicked
+if (isset($_POST['logout'])) {
+    // Destroy the session to log out the user
+    session_destroy();
+    // Redirect to example.php (or any page you want)
+    header("Location: idle.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +23,27 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
-        .wrapper{
+        .wrapper {
             width: 600px;
             margin-left: 200px;
         }
-        table tr td:last-child{
+        table tr td:last-child {
             width: 120px;
+        }
+        /* Position the logout button in the top-right corner */
+        .logout-btn {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .logout-btn:hover {
+            background-color: #d32f2f;
         }
     </style>
     <script>
@@ -24,6 +53,11 @@
     </script>
 </head>
 <body>
+    <!-- Logout Button -->
+    <form method="POST" action="">
+        <button class="logout-btn" type="submit" name="logout">Logout</button>
+    </form>
+
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
