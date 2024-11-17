@@ -25,14 +25,14 @@ if (isset($_POST['logout'])) {
     <style>
         .wrapper {
             width: 600px;
-            margin-left: 200px;
+            margin-left: 50px;
         }
         table tr td:last-child {
             width: 120px;
         }
         /* Position the logout button in the top-right corner */
         .logout-btn {
-            position: fixed;
+            position: absolute;
             top: 10px;
             right: 10px;
             padding: 10px 20px;
@@ -42,6 +42,7 @@ if (isset($_POST['logout'])) {
             border-radius: 5px;
             cursor: pointer;
         }
+
         .logout-btn:hover {
             background-color: #d32f2f;
         }
@@ -84,6 +85,7 @@ if (isset($_POST['logout'])) {
                                         echo "<th>Origin</th>";
                                         echo "<th>Beer Style</th>";
                                         echo "<th>Spec Beer Style</th>";
+                                        echo "<th>Price</th>";
                                         echo "<th>Description</th>";
                                         echo "<th>Food Pairings</th>";
                                         echo "<th>Ounces</th>";
@@ -92,6 +94,8 @@ if (isset($_POST['logout'])) {
                                         echo "<th>IBU</th>";
                                         echo "<th>SRM</th>";
                                         echo "<th>Calories</th>";
+                                        echo "<th>Image Name</th>";
+                                        echo "<th>Stocked?</th>";
                                         echo "<th>Action</th>";
                                     echo "</tr>";
                                 echo "</thead>";
@@ -104,6 +108,7 @@ if (isset($_POST['logout'])) {
                                         echo "<td>" . $row['origin'] . "</td>";
                                         echo "<td>" . $row['beer_style'] . "</td>";
                                         echo "<td>" . $row['spec_beer_style'] . "</td>";
+                                        echo "<td>$" . $row['price'] . "</td>";
                                         echo "<td>" . $row['description'] . "</td>";
                                         echo "<td>" . $row['food_pairings'] . "</td>";
                                         echo "<td>" . $row['ounces'] . "</td>";
@@ -112,6 +117,8 @@ if (isset($_POST['logout'])) {
                                         echo "<td>" . $row['ibu'] . "</td>";
                                         echo "<td>" . $row['srm'] . "</td>";
                                         echo "<td>" . $row['calories'] . "</td>";
+                                        echo "<td>" . $row['image'] . "</td>";
+                                        echo "<td><img src='" . ($row['stock'] == 1 ? 'images/yes.png' : 'images/no.png') . "' alt='" . ($row['stock'] == 1 ? 'Yes' : 'No') . "' style='width: 20px; height: 20px;'></td>";
                                         echo "<td>";
                                             echo '<a href="CRUD_read.php?id='. $row['id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                             echo '<a href="CRUD_update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';

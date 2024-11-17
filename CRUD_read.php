@@ -37,6 +37,8 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                 $calories = $row["calories"];
                 $ounces = $row["ounces"];
                 $milliliters = $row["milliliters"];
+                $image = $row["image"];
+                $stock = $row["stock"];
             } else{
                 // URL doesn't contain a valid id parameter. Redirect to error page
                 header("location: error.php");
@@ -120,16 +122,24 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
                         <p><b><?php echo $srm; ?></b></p>
                     </div>
                     <div class="form-group">
-                        <label>Calories</label>
-                        <p><b><?php echo $calories; ?></b></p>
-                    </div>
-                    <div class="form-group">
                         <label>Ounces</label>
                         <p><b><?php echo $ounces; ?></b></p>
                     </div>
                     <div class="form-group">
                         <label>Milliliters</label>
                         <p><b><?php echo $milliliters; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Calories</label>
+                        <p><b><?php echo $calories; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Image Name</label>
+                        <p><b><?php echo $image; ?></b></p>
+                    </div>
+                    <div class="form-group">
+                        <label>Stock Status</label>
+                        <p><b><?php echo "<td><img src='" . ($row['stock'] == 1 ? 'images/yes.png' : 'images/no.png') . "' alt='" . ($row['stock'] == 1 ? 'Yes' : 'No') . "' style='width: 20px; height: 20px;'></td>"; ?></b></p>
                     </div>
                     <p><a href="index.php" class="btn btn-primary">Back</a></p>
                 </div>
@@ -138,3 +148,5 @@ if(isset($_GET["id"]) && !empty(trim($_GET["id"]))){
     </div>
 </body>
 </html>
+
+
