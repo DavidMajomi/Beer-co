@@ -180,7 +180,7 @@
         </div>
 
         <div class="help-container">
-            <a href="help.html" class="help-link">
+            <a href="info.php" class="help-link">
                 <i class="fa-solid fa-question"></i>
             </a>
         </div>

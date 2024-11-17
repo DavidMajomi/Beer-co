@@ -32,15 +32,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $user['password'])) {
             // Successful login, store user data in session
             $_SESSION['username'] = $username;
-            echo "Login successful. Welcome, " . $username . "!<br>";
             // Redirect to a protected page (e.g., dashboard)
             header("Location: index.php");
             exit;
         } else {
-            echo "Invalid user!<br>";
+            $errorMessage = "Invalid user!";
         }
     } else {
-        echo "Invalid user!<br>";
+        $errorMessage = "Invalid user!";
     }
 }
 
@@ -54,21 +53,85 @@ mysqli_close($link);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        h2 {
+            color: #4CAF50;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        label {
+            font-size: 16px;
+        }
+        input[type="text"],
+        input[type="password"] {
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+        .error-message {
+            color: #ff0000;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-<h2>Login</h2>
+<div class="container">
+    <?php if (isset($errorMessage)): ?>
+        <div class="error-message">
+            <?php echo $errorMessage; ?>
+        </div>
+    <?php endif; ?>
 
-<!-- Login form -->
-<form method="POST" action="">
-    <label for="username">Username:</label>
-    <input type="text" name="username" id="username" required><br><br>
+    <h2>Login</h2>
 
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password" required><br><br>
+    <!-- Login form -->
+    <form method="POST" action="">
+        <label for="username">Username:</label>
+        <input type="text" name="username" id="username" required><br>
 
-    <input type="submit" value="Login">
-</form>
+        <label for="password">Password:</label>
+        <input type="password" name="password" id="password" required><br>
+
+        <input type="submit" value="Login">
+    </form>
+</div>
 
 </body>
 </html>
