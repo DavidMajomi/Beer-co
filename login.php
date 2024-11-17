@@ -33,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Successful login, store user data in session
             $_SESSION['username'] = $username;
             // Redirect to a protected page (e.g., dashboard)
-            header("Location: index.php");
+            header("Location: settings.php");
             exit;
         } else {
             $errorMessage = "Invalid user!";
