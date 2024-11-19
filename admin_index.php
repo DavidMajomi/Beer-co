@@ -1,3 +1,17 @@
+<?php
+// Start the session
+session_start();
+
+// Check if the user is logged in and if the logout button is clicked
+if (isset($_POST['logout'])) {
+    // Destroy the session to log out the user
+    session_destroy();
+    // Redirect to example.php (or any page you want)
+    header("Location: idle.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,12 +23,28 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
-        .wrapper{
+        .wrapper {
             width: 600px;
-            margin-left: 200px;
+            margin-left: 50px;
         }
-        table tr td:last-child{
+        table tr td:last-child {
             width: 120px;
+        }
+        /* Position the logout button in the top-right corner */
+        .logout-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            padding: 10px 20px;
+            background-color: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .logout-btn:hover {
+            background-color: #d32f2f;
         }
     </style>
     <script>
@@ -24,6 +54,11 @@
     </script>
 </head>
 <body>
+    <!-- Logout Button -->
+    <form method="POST" action="">
+        <button class="logout-btn" type="submit" name="logout">Logout</button>
+    </form>
+
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -50,6 +85,7 @@
                                         echo "<th>Origin</th>";
                                         echo "<th>Beer Style</th>";
                                         echo "<th>Spec Beer Style</th>";
+                                        echo "<th>Price</th>";
                                         echo "<th>Description</th>";
                                         echo "<th>Food Pairings</th>";
                                         echo "<th>Ounces</th>";
@@ -58,6 +94,8 @@
                                         echo "<th>IBU</th>";
                                         echo "<th>SRM</th>";
                                         echo "<th>Calories</th>";
+                                        echo "<th>Image Name</th>";
+                                        echo "<th>Stocked?</th>";
                                         echo "<th>Action</th>";
                                     echo "</tr>";
                                 echo "</thead>";
@@ -70,6 +108,7 @@
                                         echo "<td>" . $row['origin'] . "</td>";
                                         echo "<td>" . $row['beer_style'] . "</td>";
                                         echo "<td>" . $row['spec_beer_style'] . "</td>";
+                                        echo "<td>$" . $row['price'] . "</td>";
                                         echo "<td>" . $row['description'] . "</td>";
                                         echo "<td>" . $row['food_pairings'] . "</td>";
                                         echo "<td>" . $row['ounces'] . "</td>";
@@ -78,6 +117,8 @@
                                         echo "<td>" . $row['ibu'] . "</td>";
                                         echo "<td>" . $row['srm'] . "</td>";
                                         echo "<td>" . $row['calories'] . "</td>";
+                                        echo "<td>" . $row['image'] . "</td>";
+                                        echo "<td><img src='" . ($row['stock'] == 1 ? 'images/yes.png' : 'images/no.png') . "' alt='" . ($row['stock'] == 1 ? 'Yes' : 'No') . "' style='width: 20px; height: 20px;'></td>";
                                         echo "<td>";
                                             echo '<a href="CRUD_read.php?id='. $row['id'] .'" class="mr-3" title="View Record" data-toggle="tooltip"><span class="fa fa-eye"></span></a>';
                                             echo '<a href="CRUD_update.php?id='. $row['id'] .'" class="mr-3" title="Update Record" data-toggle="tooltip"><span class="fa fa-pencil"></span></a>';

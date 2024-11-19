@@ -167,8 +167,8 @@
             <img src="path_to_logo.png" alt="Logo" class="logo">
         </div>
 
-        <div class="settings-container">
-            <a href='Beeco Kiosk First Draft/specials.html' class="settings-link">
+        <div class="admin_settings-container">
+            <a href='admin_login.php' class="settings-link">
                 <i class="fas fa-cogs"></i> 
             </a>
         </div>
@@ -180,13 +180,13 @@
         </div>
 
         <div class="help-container">
-            <a href="help.html" class="help-link">
+            <a href="info.php" class="help-link">
                 <i class="fa-solid fa-question"></i>
             </a>
         </div>
 
         <div class="close-container">
-            <a href="close.html" class="close-link">
+            <a href="idle.php" class="close-link">
                 <i class="fa-solid fa-x"></i>
             </a>
         </div>
