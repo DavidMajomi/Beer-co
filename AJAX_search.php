@@ -157,6 +157,9 @@
             $(document).on("click", ".result p", function(){
                 $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
                 $(this).parent(".result").empty();
+                var clickedBeer = $(this).text(); // Get the text (beer name) of the clicked result
+                window.location.href = "AJAX_display.php?brand_name=" + encodeURIComponent(clickedBeer);
+                
             });
         });
     </script>
