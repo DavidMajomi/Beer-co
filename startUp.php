@@ -74,6 +74,7 @@ $sql = "
             srm INT,
             calories INT,
             image VARCHAR(255),
+            special VARCHAR(255),
             stock INT
         );";
 

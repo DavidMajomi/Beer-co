@@ -173,7 +173,7 @@
             </a>
         </div>
 
-        <div class="banner-container" onclick="window.location.href='Beeco Kiosk First Draft/specials.html';">
+        <div class="banner-container" onclick="window.location.href='specials.php';">
             <div class="banner-text">
                 Our Specials Page
             </div>
