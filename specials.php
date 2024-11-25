@@ -78,6 +78,45 @@
             text-decoration: underline;
         }
 
+
+        /* Container for all the beer items */
+        .beer-items-container {
+            display: flex;
+            flex-wrap: wrap;  /* Ensure items wrap if necessary */
+            gap: 20px;  /* Space between items */
+            justify-content: flex-start; /* Align items to the left */
+            
+        }
+
+        /* Each individual beer item */
+        .beer-item {
+            width: 300px;  /* Width of each item */
+            padding: 15px;  /* Add some padding */
+            border: 1px solid #ccc;  /* Add a border around each item */
+            border-radius: 8px;  /* Optional: rounded corners */
+            text-align: center;  /* Center the text */
+            box-sizing: border-box;  /* Include padding and border in the width */
+            background-color: #f9f9f9;  /* Background color */
+        }
+
+        .beer-item img {
+            width: 100%;  /* Make the image fill the container's width */
+            height: auto;  /* Maintain aspect ratio */
+            border-radius: 8px;  /* Optional: rounded corners for the image */
+        }
+
+        /* Optional: Style for the heading and paragraph inside the beer-item */
+        .beer-item h3 {
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .beer-item p {
+            font-size: 1em;
+            color: #555;
+        }
+
+
         
     </style>
 </head>
@@ -116,8 +155,8 @@
 
     <?php
         // Database connection settings
-        require_once "startUp.php";
-        require_once "config.php";
+        // require_once "startUp.php";
+        // require_once "config.php";
 
         // MySQL connection using MySQLi
         $host = 'localhost';
@@ -140,15 +179,18 @@
         $result = mysqli_query($link, $sql);
         
         // Check if any results were returned
+        echo "<div class='beer-items-container'>";
         if (mysqli_num_rows($result) > 0) {
             // Loop through the rows and display them
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='beer-item'>";
                 echo "<h3>" . $row['brand_name'] . " - " . $row['beer_style'] . "</h3>";
                 echo "<p>Price: $" . $row['price'] . "</p>";
-                echo "<img src='" . $row['image'] . "' alt='" . $row['brand_name'] . "' class='beer-image' />";
+                // echo "<img src='" . images\placeholder.png . "' alt='" . $row['brand_name'] . "' class='beer-image' />";
+                echo "<img src='images/placeholder.png' alt='" . $row['brand_name'] . "' class='beer-image' />";
                 echo "</div>";
             }
+        echo "</div>";
         } else {
             echo "No beers found.";
         }
