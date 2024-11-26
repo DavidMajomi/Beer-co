@@ -84,7 +84,7 @@
             display: flex;
             flex-wrap: wrap;  /* Ensure items wrap if necessary */
             gap: 20px;  /* Space between items */
-            justify-content: flex-start; /* Align items to the left */
+            justify-content: center; /* Align items to the left */
             
         }
 
@@ -116,7 +116,10 @@
             color: #555;
         }
 
-
+        .back-arrow {
+            font-size: 200px;
+            height: auto;
+        }
         
     </style>
 </head>
@@ -153,6 +156,8 @@
 
     <H1>Current Beers on Specials</H1>
 
+</body>
+
     <?php
         // Database connection settings
         // require_once "startUp.php";
@@ -186,19 +191,19 @@
                 echo "<div class='beer-item'>";
                 echo "<h3>" . $row['brand_name'] . " - " . $row['beer_style'] . "</h3>";
                 echo "<p>Price: $" . $row['price'] . "</p>";
-                // echo "<img src='" . images\placeholder.png . "' alt='" . $row['brand_name'] . "' class='beer-image' />";
-                echo "<img src='images/placeholder.png' alt='" . $row['brand_name'] . "' class='beer-image' />";
+                echo "<img src='images/" . $row['image'] . "' alt='" . $row['brand_name'] . "' class='beer-image' />";
                 echo "</div>";
             }
         echo "</div>";
         } else {
             echo "No beers found.";
-        }
+        }   
         
         // Close the connection
         mysqli_close($link);
-    ?>
-
-
+        ?>
+    <div class="back-arrow">
+        <i class="fa-solid fa-arrow-left"></i>
+    </div>
 </body>
 </html>
