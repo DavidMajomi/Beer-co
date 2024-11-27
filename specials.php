@@ -117,8 +117,15 @@
         }
 
         .back-arrow {
-            font-size: 200px;
+            margin: 50px;
+            font-size: 80px;
             height: auto;
+        }
+
+        .back-arrow:hover
+        {
+            color: #4CAF50;
+            text-decoration: underline;
         }
         
     </style>
@@ -202,7 +209,7 @@
         // Close the connection
         mysqli_close($link);
         ?>
-    <div class="back-arrow">
+    <div class="back-arrow" onclick="window.location.href='AJAX_search.php';">
         <i class="fa-solid fa-arrow-left"></i>
     </div>
 </body>
