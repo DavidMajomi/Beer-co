@@ -108,17 +108,17 @@ $sql_insert = "
         special,
         stock
     ) VALUES
-    ('Hoppy Hills', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 'Yes', 1),
-    ('Raging Grove', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 'Yes', 1),
-    ('Solemn Hills', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 'Yes', 1),
-    ('Long Leg', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 'Yes', 1),
-    ('Sanp Maw', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 'Yes', 1),
-    ('Thunder Jaw', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 'Yes', 1),
-    ('Solemn Hills', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 'Yes', 1),
-    ('Solemn Hills', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 'Yes', 1),
-    ('Bowling Hills', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 'No', 1),
-    ('Bowling Hills', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 'No', 1),
-    ('Finnish Dream', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 'No', 1);
+    ('Hoppy Hills', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 1, 1),
+    ('Raging Grove', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 1, 1),
+    ('Solemn Hills', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 1, 1),
+    ('Long Leg', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 1, 1),
+    ('Sanp Maw', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 1, 1),
+    ('Thunder Jaw', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 1, 1),
+    ('Solemn Hills', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 1, 1),
+    ('Solemn Hills', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 1, 1),
+    ('Bowling Hills', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 0, 1),
+    ('Bowling Hills', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 0, 1),
+    ('Finnish Dream', 'Hoppy Brewing Co.', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 0, 1);
 ";
 
 if (mysqli_query($link, $sql_insert)) {

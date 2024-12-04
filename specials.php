@@ -185,7 +185,7 @@
         }
         
         // SQL to fetch all beers (assuming you're getting data from a 'beers' table)
-        $sql = "SELECT brand_name, beer_style, price, image FROM beers WHERE special = 'Yes'";
+        $sql = "SELECT brand_name, beer_style, price, image FROM beers WHERE special = 1";
         
         // Execute the query
         $result = mysqli_query($link, $sql);
