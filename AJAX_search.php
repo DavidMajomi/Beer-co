@@ -42,16 +42,17 @@
             padding: 20px 20px;
             cursor: pointer;
             flex-grow: 1;
+            height: 250px;
         }
 
         .banner-text {
             max-width: 400px;
             text-align: center;
-            font-size: 20px;
+            font-size: 40px;
             font-weight: bold;
             white-space: nowrap;
             overflow: hidden;
-            text-overflow: ellipsis;
+            /* text-overflow: ellipsis; */
         }
 
         .settings-container, .help-container, .close-container {
