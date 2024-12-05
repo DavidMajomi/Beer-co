@@ -185,7 +185,7 @@
         }
         
         // SQL to fetch all beers (assuming you're getting data from a 'beers' table)
-        $sql = "SELECT brand_name, beer_style, price, image FROM beers WHERE special = 'Yes'";
+        $sql = "SELECT brand_name, beer_style, promotion_price, image FROM beers WHERE special = 1";
         
         // Execute the query
         $result = mysqli_query($link, $sql);
@@ -197,7 +197,7 @@
             while ($row = mysqli_fetch_assoc($result)) {
                 echo "<div class='beer-item'>";
                 echo "<h3>" . $row['brand_name'] . " - " . $row['beer_style'] . "</h3>";
-                echo "<p>Price: $" . $row['price'] . "</p>";
+                echo "<p>Price: $" . $row['promotion_price'] . "</p>";
                 echo "<img src='images/" . $row['image'] . "' alt='" . $row['brand_name'] . "' class='beer-image' />";
                 echo "</div>";
             }
