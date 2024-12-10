@@ -46,6 +46,20 @@ if (isset($_POST['logout'])) {
         .logout-btn:hover {
             background-color: #d32f2f;
         }
+
+        .back-arrow {
+            position: fixed;
+            bottom: 20px; /* Position towards the bottom left */
+            left: 20px;   /* Position it to the left of the screen */
+            font-size: 40px; /* Ensure the icon is big enough */
+            cursor: pointer;
+        }
+
+        .back-arrow:hover {
+            color: #4CAF50;
+            text-decoration: underline;
+        }
+
     </style>
     <script>
         $(document).ready(function(){
@@ -143,6 +157,11 @@ if (isset($_POST['logout'])) {
                 </div>
             </div>        
         </div>
+    </div>
+
+    <!-- Back Arrow -->
+    <div class="back-arrow" onclick="window.location.href='admin_settings.php';">
+        <i class="fa fa-arrow-left"></i>
     </div>
 </body>
 </html>
