@@ -124,6 +124,7 @@
         }
 
         .back-arrow {
+            position: fixed;
             margin: 50px;
             font-size: 80px;
             height: auto;
@@ -170,7 +171,6 @@
 
     <H1>Current Beers on Specials</H1>
 
-</body>
 
     <?php
         // Database connection settings
@@ -210,7 +210,7 @@
             }
         echo "</div>";
         } else {
-            echo "No beers found.";
+            echo "<h2>No promotions available at this time.</h2>";
         }   
         
         // Close the connection
