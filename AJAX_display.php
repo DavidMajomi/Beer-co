@@ -248,7 +248,7 @@ if (isset($_GET["brand_name"]) && !empty(trim($_GET["brand_name"]))) {
                 </div>
             </div>
         </div>
-        <a href="admin_index.php" class="back-btn">Back</a>
+        <a href="javascript:void(0);" class="back-btn" onclick="window.history.back();">Back</a>
     </div>
 </body>
 </html>
