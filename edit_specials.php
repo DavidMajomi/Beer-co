@@ -16,9 +16,11 @@ if (isset($_POST['logout'])) {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Edit Specials</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -45,6 +47,21 @@ if (isset($_POST['logout'])) {
 
         .logout-btn:hover {
             background-color: #d32f2f;
+        }
+
+        .back-arrow {
+            position: fixed;
+            margin: 50px;
+            font-size: 80px;
+            height: auto;
+            left: 20px;
+            bottom: 20px;
+        }
+
+        .back-arrow:hover
+        {
+            color: #4CAF50;
+            text-decoration: underline;
         }
     </style>
     <script>
@@ -124,5 +141,10 @@ if (isset($_POST['logout'])) {
             </div>        
         </div>
     </div>
+
+    <div class="back-arrow" onclick="window.location.href='admin_settings.php';">
+        <i class="fa-solid fa-arrow-left"></i>
+    </div>
+
 </body>
 </html>
