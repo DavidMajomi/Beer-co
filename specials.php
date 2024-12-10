@@ -99,6 +99,13 @@
             background-color: #f9f9f9;  /* Background color */
         }
 
+        .beer-item:hover {
+            transform: translateY(-5px);  /* Slightly lift the item up */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: #e9e9e9;  
+            cursor: pointer;
+        }
+
         .beer-item img {
             width: 100%;  /* Make the image fill the container's width */
             height: auto;  /* Maintain aspect ratio */
@@ -195,7 +202,7 @@
         if (mysqli_num_rows($result) > 0) {
             // Loop through the rows and display them
             while ($row = mysqli_fetch_assoc($result)) {
-                echo "<div class='beer-item'>";
+                echo "<div class='beer-item' onclick=\"window.location.href='AJAX_display.php?brand_name=" . urlencode($row['brand_name']) . "';\">";
                 echo "<h3>" . $row['brand_name'] . " - " . $row['beer_style'] . "</h3>";
                 echo "<p>Price: $" . $row['promotion_price'] . "</p>";
                 echo "<img src='images/" . $row['image'] . "' alt='" . $row['brand_name'] . "' class='beer-image' />";
