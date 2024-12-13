@@ -9,44 +9,44 @@ if($link === false){
 }
 
 // Prepare the SQL query with dynamic filtering
-$sql = "SELECT * FROM beers WHERE 1";
+$sql = "SELECT * FROM beers WHERE 1";  // Base query, always true
 
 // Array to hold filter conditions
 $filters = [];
 
 // Check if a search term is provided (for brand_name)
 if(isset($_REQUEST["term"]) && !empty($_REQUEST["term"])) {
-    $filters[] = "brand_name LIKE ?";
+    $filters[] = "brand_name LIKE ?";  // Add condition for brand_name
 }
 
 // Check if a brewer is selected
 if(isset($_REQUEST["brewer"]) && $_REQUEST["brewer"] != 'all') {
-    $filters[] = "brewer = ?";
+    $filters[] = "brewer = ?";  // Add condition for brewer
 }
 
 // Check if a country is selected
 if(isset($_REQUEST["country"]) && $_REQUEST["country"] != 'all') {
-    $filters[] = "origin = ?";
+    $filters[] = "origin = ?";  // Add condition for country
 }
 
 // Check if a style is selected
 if(isset($_REQUEST["style"]) && $_REQUEST["style"] != 'all') {
-    $filters[] = "beer_style = ?";
+    $filters[] = "beer_style = ?";  // Add condition for style
 }
 
 // Check if SRM is selected
 if(isset($_REQUEST["srm"]) && $_REQUEST["srm"] != 'all') {
-    $filters[] = "srm = ?";
+    $filters[] = "srm = ?";  // Add condition for SRM
 }
 
 // Check if ABV is selected
-if (isset($_REQUEST["abv"]) && $_REQUEST["abv"] != 'all') {
-    $filters[] = "abv = ?";
+if (isset($_REQUEST["abv"]) && $_REQUEST["abv"] != '') {
+    $filters[] = "abv = ?";  // Add condition for ABV
 }
 
 // Check if IBU is selected
-if (isset($_REQUEST["ibu"]) && $_REQUEST["ibu"] != 'all') {
-    $filters[] = "ibu = ?";
+if (isset($_REQUEST["ibu"]) && $_REQUEST["ibu"] != '') {
+    $filters[] = "ibu = ?";  // Add condition for IBU
 }
 
 // If there are filters, append them to the SQL query
@@ -56,51 +56,50 @@ if(count($filters) > 0) {
 
 // Prepare the statement
 if($stmt = mysqli_prepare($link, $sql)) {
-    
     // Array to hold the parameters to bind
     $params = [];
-    $param_types = '';
+    $param_types = '';  // String to specify the types of parameters to bind
     
     // Add parameters for search term (if provided)
     if(isset($_REQUEST["term"]) && !empty($_REQUEST["term"])) {
-        $params[] = $_REQUEST["term"] . '%';
-        $param_types .= 's'; // string
+        $params[] = $_REQUEST["term"] . '%';  // Wildcard search for LIKE
+        $param_types .= 's';  // 's' stands for string
     }
     
     // Add parameters for brewer (if selected)
     if(isset($_REQUEST["brewer"]) && $_REQUEST["brewer"] != 'all') {
         $params[] = $_REQUEST["brewer"];
-        $param_types .= 's'; // string
+        $param_types .= 's';  // 's' for string
     }
     
     // Add parameters for country (if selected)
     if(isset($_REQUEST["country"]) && $_REQUEST["country"] != 'all') {
         $params[] = $_REQUEST["country"];
-        $param_types .= 's'; // string
+        $param_types .= 's';  // 's' for string
     }
     
     // Add parameters for style (if selected)
     if(isset($_REQUEST["style"]) && $_REQUEST["style"] != 'all') {
         $params[] = $_REQUEST["style"];
-        $param_types .= 's'; // string
+        $param_types .= 's';  // 's' for string
     }
     
     // Add parameters for SRM (if selected)
     if(isset($_REQUEST["srm"]) && $_REQUEST["srm"] != 'all') {
         $params[] = $_REQUEST["srm"];
-        $param_types .= 's'; // string
+        $param_types .= 's';  // 's' for string
     }
 
     // Add parameters for ABV (if selected)
-    if (isset($_REQUEST["abv"]) && $_REQUEST["abv"] != 'all') {
-        $params[] = (float)$_REQUEST["abv"]; // Ensure it's treated as a float
-        $param_types .= 'd'; // double (float)
+    if (isset($_REQUEST["abv"]) && $_REQUEST["abv"] != '') {
+        $params[] = (float)$_REQUEST["abv"];  // Ensure it's treated as a float
+        $param_types .= 'd';  // 'd' for double (float)
     }
 
     // Add parameters for IBU (if selected)
-    if (isset($_REQUEST["ibu"]) && $_REQUEST["ibu"] != 'all') {
-        $params[] = (float)$_REQUEST["ibu"]; // Ensure it's treated as a float
-        $param_types .= 'd'; // double (float)
+    if (isset($_REQUEST["ibu"]) && $_REQUEST["ibu"] != '') {
+        $params[] = (float)$_REQUEST["ibu"];  // Ensure it's treated as a float
+        $param_types .= 'd';  // 'd' for double (float)
     }
 
     // Bind the parameters dynamically
@@ -116,20 +115,16 @@ if($stmt = mysqli_prepare($link, $sql)) {
         if(mysqli_num_rows($result) > 0) {
             // Fetch result rows as an associative array
             while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-                // Display the results
-                echo "<p>" . $row["brand_name"] . "</p>";
+                echo '<p>' . $row['brand_name'] . '</p>';
             }
         } else {
-            echo "<p>No matches found</p>";
+            echo '<p>No results found.</p>';
         }
     } else {
-        echo "ERROR: Could not execute $sql. " . mysqli_error($link);
+        echo "ERROR: Could not execute query. " . mysqli_error($link);
     }
-    
-    // Close the prepared statement
-    mysqli_stmt_close($stmt);
 } else {
-    echo "ERROR: Could not prepare query $sql. " . mysqli_error($link);
+    echo "ERROR: Could not prepare query. " . mysqli_error($link);
 }
 
 // Close connection

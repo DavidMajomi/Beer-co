@@ -111,7 +111,6 @@
             top: 15%;
             left: 0;
             width: 100%;
-            max-height: 300px;
             overflow-y: auto;
             background-color: #fff;
             border: 1px solid #ccc;
@@ -132,37 +131,54 @@
         }
     </style>
     <script>
-        $(document).ready(function(){
-            // Handle keyup event to trigger search
-            $('.search-box input[type="text"]').on("keyup input", function(){
-                var inputVal = $(this).val();
-                var brewerFilter = $('#brewer-select').val();  // Get selected filter
-                var countryFilter = $('#country-select').val();  
-                var styleFilter = $('#style-select').val();
-                var srmFilter = $('#srm-select').val();
-                var abvFilter =$('abv-select').val();
-                var ibuFilter =$('ibu-select').val();
-                var resultDropdown = $(this).siblings(".result");
-                
-                if(inputVal.length){
-                    $.get("AJAX_backend_search.php", {term: inputVal, brewer: brewerFilter, country: countryFilter, style: styleFilter, srn: srmFilter, abv: abvFilter, ibu: ibuFilter}).done(function(data){
-                        // Display the returned data in the result dropdown
-                        resultDropdown.html(data);
-                    });
-                } else{
-                    resultDropdown.empty();
-                }
+       $(document).ready(function() {
+        // Function to handle search based on inputs and filters
+        function search() {
+            var inputVal = $('.search-box input[type="text"]').val();  // Get search term
+            var brewerFilter = $('#brewer-select').val();  // Get selected brewer filter
+            var countryFilter = $('#country-select').val();  // Get selected country filter
+            var styleFilter = $('#style-select').val();  // Get selected style filter
+            var srmFilter = $('#srm-select').val();  // Get selected SRM filter
+            var abvFilter = $('#abv-select').val();  // Get selected ABV filter
+            var ibuFilter = $('#ibu-select').val();  // Get selected IBU filter
+            var resultDropdown = $('.search-box .result');  // Dropdown for results
+            
+            // If there is any input text or filter changes, send AJAX request
+            $.get("AJAX_backend_search.php", {
+                term: inputVal,
+                brewer: brewerFilter,
+                country: countryFilter,
+                style: styleFilter,
+                srm: srmFilter,
+                abv: abvFilter,
+                ibu: ibuFilter
+            }).done(function(data) {
+                resultDropdown.html(data);  // Display results
             });
+        }
 
-            // Set input value on click of result item
-            $(document).on("click", ".result p", function(){
-                $(this).parents(".search-box").find('input[type="text"]').val($(this).text());
-                $(this).parent(".result").empty();
-                var clickedBeer = $(this).text(); // Get the text (beer name) of the clicked result
-                window.location.href = "AJAX_display.php?brand_name=" + encodeURIComponent(clickedBeer);
-                
-            });
+        // Trigger search when typing in the search input
+        $('.search-box input[type="text"]').on("keyup input", function() {
+            search();  // Call search function on input change
         });
+
+        // Trigger search when changing a filter dropdown
+        $('#brewer-select, #country-select, #style-select, #srm-select, #abv-select, #ibu-select').on("change", function() {
+            search();  // Call search function on filter change
+        });
+
+        search();  
+
+        // Set input value on click of result item
+        $(document).on("click", ".result p", function() {
+            var clickedBeer = $(this).text();  // Get the text of the clicked result
+            $('.search-box input[type="text"]').val(clickedBeer);  // Set the input value to the selected result
+            $(this).parent(".result").empty();  // Clear the result dropdown
+            
+            // Redirect to the beer details page
+            window.location.href = "AJAX_display.php?brand_name=" + encodeURIComponent(clickedBeer);
+        });
+    });
     </script>
 </head>
 <body>
@@ -199,15 +215,13 @@
     <!-- Search box with dropdown filter -->
     <div class="search-box">
         <input type="text" autocomplete="off" placeholder="Search beers..." />
-        <div class="result"></div>
         
-        <!-- Dropdown Filter is now always visible -->
         <div class="filter-dropdown">
             <select id="brewer-select" class="form-control">
                 <option value="all">All Brewers</option>
                 <option value="coors">Coors</option>
-                <option value="founders">Founders Brewing</option>
-                <option value="sierra-nevada">Sierra Nevada</option>
+                <option value="founders brewing">Founders Brewing</option>
+                <option value="sierra nevada">Sierra Nevada</option>
             </select>
 
             <select id="country-select" class="form-control">
@@ -219,8 +233,8 @@
 
             <select id="style-select" class="form-control">
                 <option value="all">Style</option>
-                <option value="india-pale-ale">India Pale Ale</option>
-                <option value="tout">Stout</option>
+                <option value="india pale ale">India Pale Ale</option>
+                <option value="stout">Stout</option>
                 <option value="lager">Lager</option>
             </select>
 
@@ -231,11 +245,13 @@
 
             <select id="srm-select" class="form-control">
                 <option value="all">SRM</option>
-                <option value="light-amber">Light Amber</option>
-                <option value="dark-brown">Dark Brown</option>
+                <option value="light amber">Light Amber</option>
+                <option value="dark brown">Dark Brown</option>
                 <option value="golden">Golden</option>
             </select>
         </div>
+
+        <div class="result"></div>
 
     </div>
 
