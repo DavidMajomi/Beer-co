@@ -146,6 +146,67 @@ if (mysqli_query($link, $sql_insert)) {
 mysqli_close($link);
 
 
+// Search Analytics
+$link = mysqli_connect("localhost", "root", "", "beerco");
+
+// SQL to drop the table if it exists
+$drop_sql = "DROP TABLE IF EXISTS search_data";
+if(mysqli_query($link, $drop_sql)){
+    echo "Table 'customer_data' dropped successfully.<br>";
+} else {
+    echo "ERROR: Not able to execute $drop_sql. " . mysqli_error($link) . "<br>";
+}
+
+
+// Attempt create table query execution
+$sql = "
+        CREATE TABLE IF NOT EXISTS search_data (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            search_term VARCHAR(255) NOT NULL,
+            count INT NOT NULL
+        );";
+
+if(mysqli_query($link, $sql)){
+    echo "Table 'search_data' created successfully.";
+} else{
+    echo "ERROR: Not able to execute $sql. " . mysqli_error($link);
+}
+
+// Close connection
+mysqli_close($link);
+
+
+// Beer Analytics
+$link = mysqli_connect("localhost", "root", "", "beerco");
+
+// SQL to drop the table if it exists
+$drop_sql = "DROP TABLE IF EXISTS popular_data";
+if(mysqli_query($link, $drop_sql)){
+    echo "Table 'popular_data' dropped successfully.<br>";
+} else {
+    echo "ERROR: Not able to execute $drop_sql. " . mysqli_error($link) . "<br>";
+}
+
+
+// Attempt create table query execution
+$sql = "
+        CREATE TABLE IF NOT EXISTS popular_data (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            brand_name VARCHAR(255) NOT NULL,
+            clicks INT NOT NULL
+        );";
+
+if(mysqli_query($link, $sql)){
+    echo "Table 'popular_data' created successfully.";
+} else{
+    echo "ERROR: Not able to execute $sql. " . mysqli_error($link);
+}
+
+// Close connection
+mysqli_close($link);
+
+
+
 // Reset admin and prompt creation
 
 // Connect to the MySQL server
