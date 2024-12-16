@@ -316,6 +316,12 @@ if (isset($_GET["brand_name"]) && !empty(trim($_GET["brand_name"]))) {
                         <label>Calories</label>
                         <p><b><?php echo isset($calories) ? $calories : 'N/A'; ?></b></p>
                     </div>
+                    <?php if (isset($stock) && $stock == 0): ?>
+                        <a href="AJAX_search.php?country=<?php echo urlencode($origin); 
+                        ?>&style=<?php echo urlencode($beer_style); 
+                        ?>&specific_style=<?php echo urlencode($spec_beer_style); 
+                        ?>&notify-btn">Out Of Stock: Click to Search For Similar Beers</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
