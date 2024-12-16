@@ -52,8 +52,79 @@ if (isset($_GET["brand_name"]) && !empty(trim($_GET["brand_name"]))) {
     // Close statement
     mysqli_stmt_close($stmt);
 
-    // Close connection
+    // Access the popular_data table to update the popularity data
+
+    // Prepare a select statement to check if the brand exists
+    $sql_popular_check = "SELECT id, brand_name, clicks FROM popular_data WHERE brand_name = ?";
+
+    if ($stmt_check = mysqli_prepare($link, $sql_popular_check)) {
+        // Bind variables to the prepared statement as parameters
+        mysqli_stmt_bind_param($stmt_check, "s", $param_brand_name);
+
+        // Set parameters
+        $param_brand_name = trim($_GET["brand_name"]);
+
+        // Execute the prepared statement
+        if (mysqli_stmt_execute($stmt_check)) {
+            $result_check = mysqli_stmt_get_result($stmt_check);
+
+            if (mysqli_num_rows($result_check) == 1) {
+                // Brand name exists - update the number_of_clicks
+                $row_check = mysqli_fetch_array($result_check, MYSQLI_ASSOC);
+                $clicks = $row_check["clicks"] + 1; // Increment clicks
+
+                // Prepare an update statement
+                $sql_update = "UPDATE popular_data SET clicks = ? WHERE id = ?";
+
+                if ($stmt_update = mysqli_prepare($link, $sql_update)) {
+                    // Bind variables to the prepared statement as parameters
+                    mysqli_stmt_bind_param($stmt_update, "ii", $param_clicks, $param_id);
+
+                    // Set parameters
+                    $param_clicks = $clicks;
+                    $param_id = $row_check["id"];
+
+                    // Execute the update statement
+                    if (!mysqli_stmt_execute($stmt_update)) {
+                        echo "Oops! Something went wrong with the update.";
+                    }
+
+                    // Close the update statement
+                    mysqli_stmt_close($stmt_update);
+                }
+            } else {
+                // Brand name doesn't exist - insert a new record
+                $sql_insert = "INSERT INTO popular_data (brand_name, clicks) VALUES (?, ?)";
+
+                if ($stmt_insert = mysqli_prepare($link, $sql_insert)) {
+                    // Bind variables to the prepared statement as parameters
+                    mysqli_stmt_bind_param($stmt_insert, "si", $param_brand_name, $param_clicks);
+
+                    // Set parameters
+                    $param_clicks = 1; // Initialize clicks to 1
+
+                    // Execute the insert statement
+                    if (!mysqli_stmt_execute($stmt_insert)) {
+                        echo "Oops! Something went wrong with the insert.";
+                    }
+
+                    // Close the insert statement
+                    mysqli_stmt_close($stmt_insert);
+                }
+            }
+        } else {
+            echo "Oops! Something went wrong with the check query.";
+        }
+
+        // Close the check statement
+        mysqli_stmt_close($stmt_check);
+    }
+
+    // Close the connection
     mysqli_close($link);
+
+    
+
 } else {
     // URL doesn't contain brand_name parameter. Redirect to error page
     header("location: error.php");
@@ -245,6 +316,12 @@ if (isset($_GET["brand_name"]) && !empty(trim($_GET["brand_name"]))) {
                         <label>Calories</label>
                         <p><b><?php echo isset($calories) ? $calories : 'N/A'; ?></b></p>
                     </div>
+                    <?php if (isset($stock) && $stock == 0): ?>
+                        <a href="AJAX_search.php?country=<?php echo urlencode($origin); 
+                        ?>&style=<?php echo urlencode($beer_style); 
+                        ?>&specific_style=<?php echo urlencode($spec_beer_style); 
+                        ?>&notify-btn">Out Of Stock: Click to Search For Similar Beers</a>
+                    <?php endif; ?>
                 </div>
             </div>
         </div>
