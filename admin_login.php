@@ -11,35 +11,68 @@ if (!$link) {
 $db_name = "admin_db";
 mysqli_select_db($link, $db_name);
 
-// Step 2: Start the session
+// Start the session
 session_start();
 
-// Step 3: Handle form submission
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+// Initialize lockout variables if not set
+if (!isset($_SESSION['failed_attempts'])) {
+    $_SESSION['failed_attempts'] = 0;
+}
+if (!isset($_SESSION['lockout_time'])) {
+    $_SESSION['lockout_time'] = 0;
+}
+
+// Check for lockout
+if ($_SESSION['failed_attempts'] >= 3) {
+    $lockout_duration = 60 * 5; // 5 minutes in seconds
+    $remaining_lockout = $_SESSION['lockout_time'] - time();
+
+    if ($remaining_lockout > 0) {
+        $errorMessage = "Too many failed attempts. Try again in " . ceil($remaining_lockout / 60) . " minutes.";
+    } else {
+        // Reset lockout after duration has passed
+        $_SESSION['failed_attempts'] = 0;
+        $_SESSION['lockout_time'] = 0;
+    }
+}
+
+// Handle form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_SESSION['failed_attempts'] < 3) {
     // Get the username and password from the form
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Step 4: Query the database to find the user
+    // Query the database to find the user
     $query = "SELECT * FROM users WHERE username = '$username'";
     $result = mysqli_query($link, $query);
 
     // Check if the user exists
     if (mysqli_num_rows($result) == 1) {
         $user = mysqli_fetch_assoc($result);
-        
-        // Step 5: Verify the password
+
+        // Verify the HASHED password
         if (password_verify($password, $user['password'])) {
-            // Successful login, store user data in session
+            // Successful login, reset lockout variables
             $_SESSION['username'] = $username;
+            $_SESSION['failed_attempts'] = 0;
+            $_SESSION['lockout_time'] = 0;
+
             // Redirect to a protected page (e.g., dashboard)
             header("Location: admin_settings.php");
             exit;
         } else {
-            $errorMessage = "Invalid user!";
+            $errorMessage = "Invalid password!";
+            $_SESSION['failed_attempts']++;
         }
     } else {
-        $errorMessage = "Invalid user!";
+        $errorMessage = "Invalid username!";
+        $_SESSION['failed_attempts']++;
+    }
+
+    // If failed attempts reach 3, set lockout time
+    if ($_SESSION['failed_attempts'] >= 3) {
+        $_SESSION['lockout_time'] = time() + 300; // Lockout for 5 minutes
+        $errorMessage = "Too many failed attempts. You are locked out for 5 minutes.";
     }
 }
 
@@ -53,12 +86,6 @@ mysqli_close($link);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <title>Login</title>
     <style>
         body {
@@ -115,21 +142,6 @@ mysqli_close($link);
             margin-bottom: 15px;
             text-align: center;
         }
-
-        .back-arrow {
-            position: fixed;
-            margin: 50px;
-            font-size: 80px;
-            height: auto;
-            left: 20px;
-            bottom: 20px;
-        }
-
-        .back-arrow:hover
-        {
-            color: #4CAF50;
-            text-decoration: underline;
-        }
     </style>
 </head>
 <body>
@@ -144,18 +156,18 @@ mysqli_close($link);
     <h2>Login</h2>
 
     <!-- Login form -->
+    <?php if ($_SESSION['failed_attempts'] < 3 || time() > $_SESSION['lockout_time']): ?>
     <form method="POST" action="">
         <label for="username">Username:</label>
-        <input type="text" name="username" id="username" required><br>
+        <input type="text" name="username" id="username" required>
 
         <label for="password">Password:</label>
-        <input type="password" name="password" id="password" required><br>
+        <input type="password" name="password" id="password" required>
 
         <input type="submit" value="Login">
     </form>
+    <?php endif; ?>
 </div>
-<div class="back-arrow" onclick="window.history.back();">
-    <i class="fa-solid fa-arrow-left"></i>
-</div>
+
 </body>
 </html>
