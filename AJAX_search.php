@@ -178,15 +178,6 @@
         if (urlParams.has('beer_style')) {
             $('#style-select').val(urlParams.get('beer_style'));
         }
-        if (urlParams.has('abv')) {
-            $('#abv-select').val(urlParams.get('abv'));
-        }
-        if (urlParams.has('ibu')) {
-            $('#ibu-select').val(urlParams.get('ibu'));
-        }
-        if (urlParams.has('srm')) {
-            $('#srm-select').val(urlParams.get('srm'));
-        }
 
         // Trigger the search to display results with pre-filled filters
         search();
