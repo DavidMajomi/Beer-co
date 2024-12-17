@@ -85,7 +85,7 @@ if (isset($_POST['logout'])) {
                     // Include config file
                     require_once "config.php";
                     
-                    $sql = "SELECT * FROM popular_data";
+                    $sql = "SELECT * FROM popular_data ORDER BY clicks DESC";
                     if ($result = mysqli_query($link, $sql)) {
                         if (mysqli_num_rows($result) > 0) {
                             echo '<table class="table table-bordered table-striped">';

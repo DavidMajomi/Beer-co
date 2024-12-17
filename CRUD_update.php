@@ -45,7 +45,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
 
     // Validate spec_beer_style
     $input_spec_beer_style = trim($_POST["spec_beer_style"]);
-    if(empty($input_spec_beer_style)){
+    if(!empty($input_spec_beer_style)){
         $spec_beer_style = $input_spec_beer_style;
     }
 
@@ -69,7 +69,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
 
     // Validate food_pairings
     $input_food_pairings = trim($_POST["food_pairings"]);
-    if(empty($input_food_pairings)){
+    if(!empty($input_food_pairings)){
         $food_pairings = $input_food_pairings;
     }
 
