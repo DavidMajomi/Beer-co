@@ -187,9 +187,6 @@
         if (urlParams.has('srm')) {
             $('#srm-select').val(urlParams.get('srm'));
         }
-        if (urlParams.has('specific_style')) {
-            $('.search-box input[type="text"]').val(urlParams.get('specific_style')); // Set the search terms
-        }
 
         // Trigger the search to display results with pre-filled filters
         search();

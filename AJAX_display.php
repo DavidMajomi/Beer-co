@@ -322,7 +322,7 @@ if (isset($_GET["brand_name"]) && !empty(trim($_GET["brand_name"]))) {
                         ?>&specific_style=<?php echo urlencode($spec_beer_style); 
                         ?>&abv=<?php echo urlencode($abv); 
                         ?>&ibu=<?php echo urlencode($ibu); 
-                        ?>&srm=<?php echo urlencode($srm); 
+                        ?>&srm=<?php echo urlencode("all"); 
                         ?>&notify-btn">Out Of Stock: Click to Search For Similar Beers</a>
                     <?php endif; ?>
                 </div>
