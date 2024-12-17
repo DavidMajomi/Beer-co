@@ -131,7 +131,7 @@
         }
     </style>
     <script>
-       $(document).ready(function() {
+        $(document).ready(function() {
         // Function to handle search based on inputs and filters
         function search() {
             var inputVal = $('.search-box input[type="text"]').val();  // Get search term
@@ -142,6 +142,16 @@
             var abvFilter = $('#abv-select').val();  // Get selected ABV filter
             var ibuFilter = $('#ibu-select').val();  // Get selected IBU filter
             var resultDropdown = $('.search-box .result');  // Dropdown for results
+
+            if (srmFilter === "light amber") {
+                srmFilter = "10,20";  
+            } else if (srmFilter === "dark brown") {
+                srmFilter = "40,60";
+            } else if (srmFilter === "golden") {
+                srmFilter = "20,40";
+            } else if (srmFilter === "all") {
+                srmFilter = "0,60";
+            }
             
             // If there is any input text or filter changes, send AJAX request
             $.get("AJAX_backend_search.php", {

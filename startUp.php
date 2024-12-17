@@ -115,8 +115,8 @@ $sql_insert = "
         stock
     ) VALUES
     ('Hoppy Hills', 'Coors', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 1, 15, '2024-12-05', '2024-12-10', 1),
-    ('Raging Grove', 'Coors', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 1, 15, '2024-12-05', '2024-12-10', 1),
-    ('Long Leg', 'Coors', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 1, 15, '2024-12-05', '2024-12-10', 1),
+    ('Raging Grove', 'Coors', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 25, 200, 'test.jpeg', 1, 15, '2024-12-05', '2024-12-10', 1),
+    ('Long Leg', 'Coors', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 52, 200, 'test.jpeg', 1, 15, '2024-12-05', '2024-12-10', 1),
     ('Snap Maw', 'Coors', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 1, 15, '2024-12-05', '2024-12-10', 1),
     ('Thunder Jaw', 'Coors', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 1, 15, '2024-12-05', '2024-12-10', 1),
     ('Solemn Hills', 'Founders Brewing', 'United States', 'IPA', 'Double IPA', 20, 'A bold and bitter IPA with tropical fruit flavors.', 'Pairs well with grilled meats and spicy foods.', 12.0, 355, 7.5, 70, 12, 200, 'test.jpeg', 1, 15, '2024-12-05', '2024-12-10', 1),

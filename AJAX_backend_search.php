@@ -14,39 +14,78 @@ $sql = "SELECT * FROM beers WHERE 1";  // Base query, always true
 // Array to hold filter conditions
 $filters = [];
 
-// Check if a search term is provided (for brand_name)
+// Initialize $param_types
+$param_types = '';  // Initialize to avoid the undefined variable warning
+
+// Array to hold the parameters
+$params = [];
+
+// Check for a search term (brand_name)
 if(isset($_REQUEST["term"]) && !empty($_REQUEST["term"])) {
     $filters[] = "brand_name LIKE ?";  // Add condition for brand_name
+    $params[] = $_REQUEST["term"] . '%';  // Wildcard search for LIKE
+    $param_types .= 's';  // 's' stands for string
 }
 
 // Check if a brewer is selected
 if(isset($_REQUEST["brewer"]) && $_REQUEST["brewer"] != 'all') {
     $filters[] = "brewer = ?";  // Add condition for brewer
+    $params[] = $_REQUEST["brewer"];
+    $param_types .= 's';  // 's' for string
 }
 
 // Check if a country is selected
 if(isset($_REQUEST["country"]) && $_REQUEST["country"] != 'all') {
     $filters[] = "origin = ?";  // Add condition for country
+    $params[] = $_REQUEST["country"];
+    $param_types .= 's';  // 's' for string
 }
 
 // Check if a style is selected
 if(isset($_REQUEST["style"]) && $_REQUEST["style"] != 'all') {
     $filters[] = "beer_style = ?";  // Add condition for style
+    $params[] = $_REQUEST["style"];
+    $param_types .= 's';  // 's' for string
 }
 
-// Check if SRM is selected
-if(isset($_REQUEST["srm"]) && $_REQUEST["srm"] != 'all') {
-    $filters[] = "srm = ?";  // Add condition for SRM
+// Check if SRM is selected and is a valid range
+if (isset($_REQUEST["srm"]) && $_REQUEST["srm"] != 'all') {
+    // Split the SRM range into start and end values
+    $srm_range = explode(",", $_REQUEST["srm"]);  // Expecting "start,end" format, e.g., "40,60"
+    
+    // Ensure there are exactly two values and both are numeric
+    if (count($srm_range) == 2 && is_numeric($srm_range[0]) && is_numeric($srm_range[1])) {
+        $srm_start = (float)$srm_range[0];  // Convert to float
+        $srm_end = (float)$srm_range[1];    // Convert to float
+        
+        // Add the corresponding SRM range filter to the filters array
+        $filters[] = "srm BETWEEN ? AND ?";
+        
+        // Add the SRM range parameters to the parameters array
+        $params[] = $srm_start;
+        $params[] = $srm_end;
+        
+        // Append 'dd' to the parameter types to indicate two float values
+        $param_types .= 'dd';
+    } else {
+        // If the SRM range is invalid, display an error message (or skip the filter)
+        echo "Invalid SRM range provided.";
+        exit;  // Optionally exit if the input is invalid
+    }
 }
 
 // Check if ABV is selected
 if (isset($_REQUEST["abv"]) && $_REQUEST["abv"] != '') {
     $filters[] = "abv = ?";  // Add condition for ABV
+    $params[] = (float)$_REQUEST["abv"];  // Ensure it's treated as a float
+    $param_types .= 'd';  // 'd' for double (float)
 }
 
 // Check if IBU is selected
 if (isset($_REQUEST["ibu"]) && $_REQUEST["ibu"] != '') {
     $filters[] = "ibu = ?";  // Add condition for IBU
+    $params[] = (float)$_REQUEST["ibu"];  // Ensure it's treated as a float
+    $param_types .= 'd';  // 'd' for double (float)
 }
 
 // If there are filters, append them to the SQL query
@@ -56,53 +95,7 @@ if(count($filters) > 0) {
 
 // Prepare the statement
 if($stmt = mysqli_prepare($link, $sql)) {
-    // Array to hold the parameters to bind
-    $params = [];
-    $param_types = '';  // String to specify the types of parameters to bind
-    
-    // Add parameters for search term (if provided)
-    if(isset($_REQUEST["term"]) && !empty($_REQUEST["term"])) {
-        $params[] = $_REQUEST["term"] . '%';  // Wildcard search for LIKE
-        $param_types .= 's';  // 's' stands for string
-    }
-    
-    // Add parameters for brewer (if selected)
-    if(isset($_REQUEST["brewer"]) && $_REQUEST["brewer"] != 'all') {
-        $params[] = $_REQUEST["brewer"];
-        $param_types .= 's';  // 's' for string
-    }
-    
-    // Add parameters for country (if selected)
-    if(isset($_REQUEST["country"]) && $_REQUEST["country"] != 'all') {
-        $params[] = $_REQUEST["country"];
-        $param_types .= 's';  // 's' for string
-    }
-    
-    // Add parameters for style (if selected)
-    if(isset($_REQUEST["style"]) && $_REQUEST["style"] != 'all') {
-        $params[] = $_REQUEST["style"];
-        $param_types .= 's';  // 's' for string
-    }
-    
-    // Add parameters for SRM (if selected)
-    if(isset($_REQUEST["srm"]) && $_REQUEST["srm"] != 'all') {
-        $params[] = $_REQUEST["srm"];
-        $param_types .= 's';  // 's' for string
-    }
-
-    // Add parameters for ABV (if selected)
-    if (isset($_REQUEST["abv"]) && $_REQUEST["abv"] != '') {
-        $params[] = (float)$_REQUEST["abv"];  // Ensure it's treated as a float
-        $param_types .= 'd';  // 'd' for double (float)
-    }
-
-    // Add parameters for IBU (if selected)
-    if (isset($_REQUEST["ibu"]) && $_REQUEST["ibu"] != '') {
-        $params[] = (float)$_REQUEST["ibu"];  // Ensure it's treated as a float
-        $param_types .= 'd';  // 'd' for double (float)
-    }
-
-    // Bind the parameters dynamically
+    // Bind the parameters dynamically if any
     if(count($params) > 0) {
         mysqli_stmt_bind_param($stmt, $param_types, ...$params);
     }
