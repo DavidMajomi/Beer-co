@@ -1,8 +1,6 @@
 <?php
 // Process delete operation after confirmation
-echo "Hey 1";
 if(isset($_POST["id"]) && !empty($_POST["id"])){
-    echo "Hey 2";
     // Include config file
     require_once "config.php";
     
