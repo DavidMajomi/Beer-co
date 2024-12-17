@@ -156,6 +156,34 @@
                 resultDropdown.html(data);  // Display results
             });
         }
+        // This code below additionally handles when we are re-directed from a beer that is out of stock
+        $(document).ready(function() {
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+
+        // Pre-fill filters based on URL parameters
+        if (urlParams.has('country')) {
+            $('#country-select').val(urlParams.get('country'));
+        }
+        if (urlParams.has('beer_style')) {
+            $('#style-select').val(urlParams.get('beer_style'));
+        }
+        if (urlParams.has('abv')) {
+            $('#abv-select').val(urlParams.get('abv'));
+        }
+        if (urlParams.has('ibu')) {
+            $('#ibu-select').val(urlParams.get('ibu'));
+        }
+        if (urlParams.has('srm')) {
+            $('#srm-select').val(urlParams.get('srm'));
+        }
+        if (urlParams.has('specific_style')) {
+            $('.search-box input[type="text"]').val(urlParams.get('specific_style')); // Set the search terms
+        }
+
+        // Trigger the search to display results with pre-filled filters
+        search();
+    });
 
         // Trigger search when typing in the search input
         $('.search-box input[type="text"]').on("keyup input", function() {

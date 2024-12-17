@@ -10,6 +10,42 @@ if (isset($_POST['logout'])) {
     header("Location: idle.php");
     exit;
 }
+
+// Check if the download button was clicked
+// CSV download functionality
+$currentDate = date('mdY');
+if (isset($_POST['download_csv'])) {
+    // Include config file
+    require_once "config.php";
+
+    // Fetch data from the database
+    $sql = "SELECT * FROM popular_data ORDER BY clicks DESC";
+    if ($result = mysqli_query($link, $sql)) {
+        // Open a memory stream for the CSV output
+        $output = fopen('php://output', 'w');
+
+        // Output the headers for CSV
+        fputcsv($output, ['#', 'Clicked Search Term', 'Clicks']);
+
+        // Output the data rows
+        while ($row = mysqli_fetch_assoc($result)) {
+            fputcsv($output, [$row['id'], $row['brand_name'], $row['clicks']]);
+        }
+
+        // Close the output stream
+        fclose($output);
+
+        // Set headers to force download
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment; filename="popular_data_' . $currentDate . '.csv"');
+
+        // Exit to stop further script execution
+        exit;
+    } else {
+        echo "Oops! Something went wrong. Please try again later.";
+    }
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -72,7 +108,11 @@ if (isset($_POST['logout'])) {
     <form method="POST" action="">
         <button class="logout-btn" type="submit" name="logout">Logout</button>
     </form>
-
+    <form method="POST" action="">
+    <button type="submit" name="download_csv" class="btn btn-success mb-3">
+        <i class="fa fa-download"></i> Download CSV
+    </button>
+    </form>
     <div class="wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -85,7 +125,7 @@ if (isset($_POST['logout'])) {
                     // Include config file
                     require_once "config.php";
                     
-                    $sql = "SELECT * FROM popular_data";
+                    $sql = "SELECT * FROM popular_data ORDER BY clicks DESC";
                     if ($result = mysqli_query($link, $sql)) {
                         if (mysqli_num_rows($result) > 0) {
                             echo '<table class="table table-bordered table-striped">';
@@ -116,6 +156,8 @@ if (isset($_POST['logout'])) {
                         echo "Oops! Something went wrong. Please try again later.";
                     }
  
+                    
+                    
                     // Close connection
                     mysqli_close($link);
                     ?>

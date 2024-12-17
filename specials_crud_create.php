@@ -46,6 +46,21 @@ if (isset($_POST['logout'])) {
         .logout-btn:hover {
             background-color: #d32f2f;
         }
+        
+        .back-arrow {
+            position: fixed;
+            margin: 50px;
+            font-size: 80px;
+            height: auto;
+            left: 20px;
+            bottom: 20px;
+        }
+
+        .back-arrow:hover
+        {
+            color: #4CAF50;
+            text-decoration: underline;
+        }
     </style>
     <script>
         $(document).ready(function(){
@@ -120,6 +135,9 @@ if (isset($_POST['logout'])) {
                 </div>
             </div>        
         </div>
+    </div>
+    <div class="back-arrow" onclick="window.location.href='edit_specials.php';">
+        <i class="fa-solid fa-arrow-left"></i>
     </div>
 </body>
 </html>
