@@ -86,7 +86,7 @@ if (isset($_POST['logout'])) {
                     // Include config file
                     require_once "config.php";
                     
-                    $sql = "SELECT * FROM beers WHERE special = 1";
+                    $sql = "SELECT * FROM beers WHERE special = 0";
                     if ($result = mysqli_query($link, $sql)) {
                         if (mysqli_num_rows($result) > 0) {
                             echo '<table class="table table-bordered table-striped">';
