@@ -202,6 +202,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)) {
                 // Record created successfully. Redirect to landing page
+                // Set a success message
+                $_SESSION['success_message'] = "Creation successful!";
                 header("location: admin_index.php");
                 exit();
             } else {

@@ -181,6 +181,7 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
             // Attempt to execute the prepared statement
             if (mysqli_stmt_execute($stmt)){
                 // Records updated successfully. Redirect to main page
+                $_SESSION['success_message'] = "Update successful!";
                 header("location: admin_index.php");
                 exit();
             } else{
