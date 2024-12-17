@@ -195,7 +195,7 @@
         }
         
         // SQL to fetch all beers (assuming you're getting data from a 'beers' table)
-        $sql = "SELECT brand_name, beer_style, promotion_price, image FROM beers WHERE special = 1";
+        $sql = "SELECT brand_name, beer_style, promotion_price, promotion_end_date, image FROM beers WHERE special = 1";
         
         // Execute the query
         $result = mysqli_query($link, $sql);
@@ -208,6 +208,7 @@
                 echo "<div class='beer-item' onclick=\"window.location.href='AJAX_display.php?brand_name=" . urlencode($row['brand_name']) . "';\">";
                 echo "<h3>" . $row['brand_name'] . " - " . $row['beer_style'] . "</h3>";
                 echo "<p>Price: $" . $row['promotion_price'] . "</p>";
+                echo "<p>Promo end date: " . (isset($row['promotion_end_date']) ? date("F j, Y", strtotime($row['promotion_end_date'])) : 'N/A') . "</p>";
                 echo "<img src='images/" . $row['image'] . "' alt='" . $row['brand_name'] . "' class='beer-image' />";
                 echo "</div>";
             }
