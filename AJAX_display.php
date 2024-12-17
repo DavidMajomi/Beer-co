@@ -318,8 +318,11 @@ if (isset($_GET["brand_name"]) && !empty(trim($_GET["brand_name"]))) {
                     </div>
                     <?php if (isset($stock) && $stock == 0): ?>
                         <a href="AJAX_search.php?country=<?php echo urlencode($origin); 
-                        ?>&style=<?php echo urlencode($beer_style); 
+                        ?>&beer_style=<?php echo urlencode($beer_style); 
                         ?>&specific_style=<?php echo urlencode($spec_beer_style); 
+                        ?>&abv=<?php echo urlencode($abv); 
+                        ?>&ibu=<?php echo urlencode($ibu); 
+                        ?>&srm=<?php echo urlencode($srm); 
                         ?>&notify-btn">Out Of Stock: Click to Search For Similar Beers</a>
                     <?php endif; ?>
                 </div>
