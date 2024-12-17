@@ -86,6 +86,7 @@ mysqli_close($link);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <title>Login</title>
     <style>
         body {
@@ -142,6 +143,21 @@ mysqli_close($link);
             margin-bottom: 15px;
             text-align: center;
         }
+
+        .back-arrow {
+            position: fixed;
+            margin: 50px;
+            font-size: 80px;
+            height: auto;
+            left: 20px;
+            bottom: 20px;
+        }
+
+        .back-arrow:hover
+        {
+            color: #4CAF50;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -168,6 +184,8 @@ mysqli_close($link);
     </form>
     <?php endif; ?>
 </div>
-
+<div class="back-arrow" onclick="window.history.back();">
+    <i class="fa-solid fa-arrow-left"></i>
+</div>
 </body>
 </html>
