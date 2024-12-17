@@ -111,11 +111,17 @@ if(isset($_POST["id"]) && !empty($_POST["id"])){
         $ibu = $input_ibu;
     }
 
-    // Validate srm
+    // Validate SRM
     $input_srm = trim($_POST["srm"]);
-    if(empty($input_srm)){
+    // Check if the value is empty
+    if (empty($input_srm)) {
+        // Convert 0 or empty input to NULL
         $srm = null;
-    } else{
+    } elseif (!is_numeric($input_srm)) {
+        // Validate if the input is a valid number
+        $srm_err = "Please enter a valid number for SRM.";
+    } else {
+        // Assign the value to the variable if it's a valid number
         $srm = $input_srm;
     }
 
