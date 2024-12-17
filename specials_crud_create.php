@@ -81,9 +81,6 @@ if (isset($_POST['logout'])) {
                 <div class="col-md-12">
                     <div class="mt-5 mb-3 clearfix">
                         <h2 class="pull-left">Edit Specials</h2>
-                        <a href="specials_crud_create.php" class="btn btn-success" style="margin-left: 10px;">
-                            <i class="fa fa-plus"></i> Add New Special
-                        </a>
                     </div>
                     <?php
                     // Include config file
